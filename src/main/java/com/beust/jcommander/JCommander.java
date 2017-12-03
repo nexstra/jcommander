@@ -367,6 +367,10 @@ public class JCommander {
                 entry.getValue().initializeDefaultValues();
             }
         }
+
+        for (ParameterDescription pd : getParameters()) {
+            initializeDefaultValue(pd);
+        }
     }
 
     /**
@@ -665,8 +669,20 @@ public class JCommander {
     }
 
     private void initializeDefaultValue(ParameterDescription pd) {
+
+        String def = pd.getParameterAnnotation().defaultIfNull();
+
+        if (def.isEmpty() || (def = def.trim()).isEmpty()) {
+            def = null;
+        }
+
+
         for (String optionName : pd.getParameter().names()) {
-            String def = options.defaultProvider.getDefaultValueFor(optionName);
+
+            if (def == null && options.defaultProvider != null) {
+                def = options.defaultProvider.getDefaultValueFor(optionName);
+            }
+
             if (def != null) {
                 p("Initializing " + optionName + " with default value:" + def);
                 pd.addValue(def, true /* default */);
