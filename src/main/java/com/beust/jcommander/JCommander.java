@@ -670,22 +670,25 @@ public class JCommander {
 
     private void initializeDefaultValue(ParameterDescription pd) {
 
-        String def = pd.getParameterAnnotation().defaultValue();
+        String annotatedDefault = pd.getParameterAnnotation().defaultValue();
 
-        if (def.isEmpty() || (def = def.trim()).isEmpty()) {
-            def = null;
+        if (annotatedDefault.isEmpty() || (annotatedDefault = annotatedDefault.trim()).isEmpty()) {
+            annotatedDefault = null;
         }
-
 
         for (String optionName : pd.getParameter().names()) {
 
-            if (def == null && options.defaultProvider != null) {
+            final String def;
+
+            if (options.defaultProvider != null) {
                 def = options.defaultProvider.getDefaultValueFor(optionName);
+            } else  {
+                def = annotatedDefault;
             }
 
             if (def != null) {
-                p("Initializing " + optionName + " with default value:" + def);
-                pd.addValue(def, true /* default */);
+                p("Initializing " + optionName + " with default value:" + annotatedDefault);
+                pd.addValue(annotatedDefault, true /* default */);
                 // remove the parameter from the list of fields to be required
                 requiredFields.remove(pd.getParameterized());
                 return;
