@@ -4,7 +4,7 @@ import com.beust.jcommander.Parameter;
 
 public class CommandWithDefaultAnnotation {
 
-    @Parameter(names = "--echo", defaultIfNull = DEFAULT_ECHO)
+    @Parameter(names = "--echo", defaultValue = DEFAULT_ECHO)
     public String echo;
 
     @Parameter(names = "--parsed")

@@ -670,7 +670,7 @@ public class JCommander {
 
     private void initializeDefaultValue(ParameterDescription pd) {
 
-        String def = pd.getParameterAnnotation().defaultIfNull();
+        String def = pd.getParameterAnnotation().defaultValue();
 
         if (def.isEmpty() || (def = def.trim()).isEmpty()) {
             def = null;
@@ -788,10 +788,8 @@ public class JCommander {
                         }
                     }
 
-                    for(final Class<? extends IParameterValidator> validator : mainParameter.annotation.validateWith()
-                            ) {
-                        mainParameter.description.validateParameter(validator,
-                            "Default", value);
+                    for (final Class<? extends IParameterValidator> validator : mainParameter.annotation.validateWith()) {
+                        mainParameter.description.validateParameter(validator, "Default", value);
                     }
 
                     mainParameter.description.setAssigned(true);

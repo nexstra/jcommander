@@ -133,6 +133,6 @@ public @interface Parameter {
    */
   int order() default -1;
 
-  String defaultIfNull() default "";
+  String defaultValue() default "";
 
 }
