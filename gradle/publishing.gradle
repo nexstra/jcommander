@@ -22,6 +22,16 @@ jar {
         )
     }
 }
+publishing {
+    publications {
+        mavenCustom(MavenPublication) {
+            from components.java
+            artifact sourceJar
+            groupId project.grup
+            artifactId project.name
+            version project.version
+
+//            pom.withXml {
 
 publishing {
     publications {
