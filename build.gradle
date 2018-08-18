@@ -9,10 +9,10 @@ buildscript {
 }
 
 plugins {
-    id "com.jfrog.bintray" version "1.2"
+    id "com.jfrog.bintray" version "1.7.3"
 }
 
-version = '1.72'
+version = '1.72-nexstra'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -35,7 +35,7 @@ jar {
 }
 
 task sourceJar(type: Jar) {
-    group 'Build'
+    group group
     description 'An archive of the source code'
     classifier 'sources'
     from sourceSets.main.allSource
@@ -53,3 +53,4 @@ test {
 tasks.withType(JavaCompile) {
   options.encoding = "UTF-8"
 }
+
