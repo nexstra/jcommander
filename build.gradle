@@ -8,14 +8,11 @@ buildscript {
     }
 }
 
-/*
 plugins {
-    id "com.jfrog.bintray" version "1.8.4"
+  id 'maven-publish'
 }
 
-*/
 
-apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'eclipse'
@@ -79,6 +76,11 @@ jar {
    }
 }
 publishing {
+   repositories { 
+     maven {
+     url "${project.buildDir}/repo"
+    }
+   }
    publications {
      mavenPublication(MavenPublication){
       from components.java 
@@ -89,8 +91,8 @@ publishing {
    } 
  } 
 }
-task install(dependsOn: publishToMavenLocal)
 /*
+task install(dependsOn: publishToMavenLocal)
 afterEvaluate {
 task printPub {
    doLast {
