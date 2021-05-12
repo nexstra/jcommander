@@ -8,11 +8,12 @@ buildscript {
     }
 }
 
+/*
 plugins {
     id "com.jfrog.bintray" version "1.8.4"
 }
 
-
+*/
 
 apply plugin: 'maven-publish'
 apply plugin: 'java'
@@ -89,6 +90,7 @@ publishing {
  } 
 }
 task install(dependsOn: publishToMavenLocal)
+/*
 afterEvaluate {
 task printPub {
    doLast {
@@ -119,4 +121,4 @@ bintray {
     }
   }
 } 
-
+*/
